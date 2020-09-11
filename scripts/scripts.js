@@ -1,7 +1,28 @@
 function getData() {
     fetch('scripts/data.json')
     .then(resp => resp.json())
-    .then(data => console.log(data))
+    .then(data => {
+
+    
+    let htmlStuff = data.map(d => {
+        return `
+        <tr>
+         <td>
+           <input 
+           type="checkbox" 
+           value="${d.completed}" 
+           ${d.completed ? "checked" : null} 
+           >
+           </td>
+           <td>${d.title}</td>
+           <td>${d.completed}</td>
+           </tr>`
+     }).join("")
+
+
+     document.querySelector('tbody').innerHTML = htmlStuff
+
+    })
 }
 
 
